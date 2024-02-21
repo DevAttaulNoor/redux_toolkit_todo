@@ -1,47 +1,51 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteUser } from '../Redux/UserReducer';
+import { deleteTodo } from '../Redux/TodoReducer';
 
 function Home() {
     const dispatch = useDispatch()
-    const users = useSelector((state) => state.users);
+    const todos = useSelector((state) => state.todos);
 
     const handleDelete = (id) => {
-        dispatch(deleteUser({id: id}))
+        dispatch(deleteTodo({ id: id }))
     }
 
-    // console.log(users)
+    // console.log(todos)
 
     return (
-        <div className='home'>
-            <h2>CURD App with Redux Toolkit</h2>
-            <Link to={'/create'}>Create +</Link>
+        <div className='home h-screen flex flex-col items-center justify-center'>
+            <div className='w-1/2 bg-yellow-100 p-5 mx-40'>
+                <h2 className='text-3xl text-center font-semibold mb-5'>CRUD App with Redux Toolkit</h2>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
+                <div className='flex items-center justify-between mb-5'>
+                    <Link to={'/add'} className='bg-green-500 text-white rounded p-2'>Add a new todo</Link>
+                    <p>Total Todo Tasks: {todos.length}</p>
+                </div>
 
-                <tbody>
-                    {users.map((user, index) => (
-                        <tr key={index}>
-                            <td>{user.id}</td>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                            <td>
-                                <Link to={`/edit/${user.id}`}>Edit</Link>
-                                <button onClick={() => handleDelete(user.id)}>Delete</button>
-                            </td>
+                <table className='w-full'>
+                    <thead>
+                        <tr className='text-2xl bg-black text-white'>
+                            <th className='py-2 border-r-2 border-white'>ID</th>
+                            <th className='py-2'>Todo</th>
+                            <th className='py-2 border-l-2 border-white'>Action</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+
+                    <tbody>
+                        {todos.map((todo, index) => (
+                            <tr key={index} className='border-b-2 border-black'>
+                                <td className='text-center w-1/4 py-2'>{todo.id}</td>
+                                <td className='text-center w-1/4 py-2'>{todo.todo}</td>
+                                <td className='text-center w-1/4 py-2'>
+                                    <Link to={`/update/${todo.id}`} className='bg-blue-500 text-white rounded p-2 px-3 mr-2'>Edit</Link>
+                                    <button className='bg-red-500 text-white rounded p-2' onClick={() => handleDelete(todo.id)}>Delete</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     )
 }
