@@ -3,11 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = [
     {
         id: 1,
-        todo: 'HTML',
-    },
-    {
-        id: 2,
-        todo: 'CSS',
+        title: 'Learn Html',
+        description: 'I have started learning html from tommorow...',
     }
 ]
 
@@ -20,10 +17,11 @@ export const todoSlice = createSlice({
         },
 
         updateTodo: (state, action) => {
-            const {id, todo} = action.payload;
+            const {id, title, description} = action.payload;
             const update = state.find(todo => todo.id == id);
             if(update){
-                update.todo = todo;
+                update.title = title;
+                update.description = description;
             }
         },
 

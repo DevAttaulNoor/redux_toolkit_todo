@@ -15,5 +15,6 @@ html{
     width: 100%;
     height: 100vh;
     scroll-behavior: smooth;
-    background: #c4c4c4;
+    color: #ffff;
+    background: #1f1e1e;
 }

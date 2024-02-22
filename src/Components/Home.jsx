@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteTodo } from '../Redux/TodoReducer';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function Home() {
     const dispatch = useDispatch()
@@ -11,35 +13,39 @@ function Home() {
         dispatch(deleteTodo({ id: id }))
     }
 
-    // console.log(todos)
-
     return (
-        <div className='home h-screen flex flex-col items-center justify-center'>
-            <div className='w-1/2 bg-yellow-100 p-5 mx-40'>
-                <h2 className='text-3xl text-center font-semibold mb-5'>CRUD App with Redux Toolkit</h2>
+        <div className='flex flex-col items-center h-screen home'>
+            <div className='w-1/2 p-5 m-auto overflow-y-auto rounded bg-neutral-700'>
+                <h2 className='mb-6 text-4xl font-semibold text-center'>Todo List</h2>
 
-                <div className='flex items-center justify-between mb-5'>
-                    <Link to={'/add'} className='bg-green-500 text-white rounded p-2'>Add a new todo</Link>
+                <div className='flex items-center justify-between mb-6'>
+                    <Link to={'/add'} className='p-2 text-white bg-green-500 rounded'>Add a new todo</Link>
                     <p>Total Todo Tasks: {todos.length}</p>
                 </div>
 
                 <table className='w-full'>
                     <thead>
-                        <tr className='text-2xl bg-black text-white'>
-                            <th className='py-2 border-r-2 border-white'>ID</th>
-                            <th className='py-2'>Todo</th>
-                            <th className='py-2 border-l-2 border-white'>Action</th>
+                        <tr className='text-2xl text-white bg-black'>
+                            <th className='w-3/12 py-2 border-2 border-white'>Title</th>
+                            <th className='w-6/12 py-2 border-2 border-white'>Description</th>
+                            <th className='w-3/12 py-2 border-2 border-white'>Action</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         {todos.map((todo, index) => (
-                            <tr key={index} className='border-b-2 border-black'>
-                                <td className='text-center w-1/4 py-2'>{todo.id}</td>
-                                <td className='text-center w-1/4 py-2'>{todo.todo}</td>
-                                <td className='text-center w-1/4 py-2'>
-                                    <Link to={`/update/${todo.id}`} className='bg-blue-500 text-white rounded p-2 px-3 mr-2'>Edit</Link>
-                                    <button className='bg-red-500 text-white rounded p-2' onClick={() => handleDelete(todo.id)}>Delete</button>
+                            <tr key={index}>
+                                <td className='w-3/12 px-1 py-2 text-center border-2 border-white'>{todo.title}</td>
+                                <td className='w-6/12 px-1 py-2 text-center border-2 border-white'>{todo.description}</td>
+                                <td className='w-3/12 px-1 py-2 border-2 border-white'>
+                                    <div className='flex items-center justify-center '>
+                                        <Link to={`/update/${todo.id}`} className='px-4 py-1 mr-2 text-white bg-blue-500 rounded '>
+                                            <EditIcon />
+                                        </Link>
+                                        <button className='px-4 py-1 text-white bg-red-500 rounded ' onClick={() => handleDelete(todo.id)}>
+                                            <DeleteIcon />
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}

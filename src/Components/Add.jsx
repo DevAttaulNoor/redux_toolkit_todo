@@ -7,26 +7,40 @@ function Add() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const todos = useSelector((state) => state.todos)
-    const [todo, setTodo] = useState('')
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addTodo({ id: todos[todos.length - 1].id + 1, todo }))
+        let newId = 1; // Default id value if todos array is empty
+
+        if (todos.length !== 0) {
+            newId = todos[todos.length - 1].id + 1; // Assign id based on the last item's id
+        }
+        
+        dispatch(addTodo({ id: newId, title, description }));
         navigate('/')
     }
 
     return (
-        <div className='add h-screen flex flex-col items-center justify-center'>
-            <div className='w-1/2 bg-yellow-100 p-5 mx-40'>
-                <h3 className='text-3xl text-center font-semibold mb-5'>Add New Todo</h3>
+        <div className='flex flex-col items-center justify-center h-screen add'>
+            <div className='w-1/2 p-5 mx-40 rounded bg-neutral-700'>
+                <h3 className='mb-6 text-3xl font-semibold text-center'>Add New Todo</h3>
                 <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="todo">Todo:</label>
-                        <input type="text" name="todo" placeholder='Enter todo..' onChange={e => setTodo(e.target.value)} />
+                    <div className='flex flex-col'>
+                        <div className='mb-3'>
+                            <label className='text-xl' htmlFor="title">Title:</label>
+                            <input className='w-full p-2 text-neutral-700 outline-0' type="text" name="title" placeholder='Enter title..' onChange={e => setTitle(e.target.value)} />
+                        </div>
+                        <div className='mb-3'>
+                            <label className='text-xl' htmlFor="description">Description:</label>
+                            <input className='w-full p-2 text-neutral-700 outline-0' type="text" name="description" placeholder='Enter description..' onChange={e => setDescription(e.target.value)} />
+                        </div>
                     </div>
-                    <div>
-                        <Link to={'/'} className='bg-gray-500 text-white rounded py-2 px-4'>Back</Link>
-                        <button className='bg-green-500 text-white rounded py-2 px-4'>Add</button>
+
+                    <div className='flex items-center justify-between'>
+                        <Link to={'/'} className='px-4 py-2 text-white bg-gray-500 rounded'>Back</Link>
+                        <button className='px-4 py-2 text-white bg-green-500 rounded '>Add</button>
                     </div>
                 </form>
             </div>
