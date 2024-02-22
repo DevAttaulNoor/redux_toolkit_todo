@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { addTodo } from '../Redux/TodoReducer'
+import Checkbox from '@mui/material/Checkbox';
 
 function Add() {
     const dispatch = useDispatch()
@@ -9,16 +10,19 @@ function Add() {
     const todos = useSelector((state) => state.todos)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
+    const time = new Date().toLocaleTimeString()
+    const date = new Date().toLocaleDateString()
+    const complete = <Checkbox />
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let newId = 1; // Default id value if todos array is empty
+        let newId = 1;
 
         if (todos.length !== 0) {
-            newId = todos[todos.length - 1].id + 1; // Assign id based on the last item's id
+            newId = todos[todos.length - 1].id + 1;
         }
         
-        dispatch(addTodo({ id: newId, title, description }));
+        dispatch(addTodo({ id: newId, title, description, time, date, complete}));
         navigate('/')
     }
 

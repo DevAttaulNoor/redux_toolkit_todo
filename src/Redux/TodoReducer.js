@@ -1,3 +1,4 @@
+import Checkbox from '@mui/material/Checkbox';
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = [
@@ -5,8 +6,13 @@ const initialState = [
         id: 1,
         title: 'Learn Html',
         description: 'I have started learning html from tommorow...',
+        time: `${new Date().toLocaleTimeString()}`,
+        date: `${new Date().toLocaleDateString()}`,
+        complete: <Checkbox />
     }
 ]
+
+console.log(initialState)
 
 export const todoSlice = createSlice({
     name: 'todos',

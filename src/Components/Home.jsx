@@ -26,18 +26,24 @@ function Home() {
                 <table className='w-full'>
                     <thead>
                         <tr className='text-2xl text-white bg-black'>
-                            <th className='w-3/12 py-2 border-2 border-white'>Title</th>
-                            <th className='w-6/12 py-2 border-2 border-white'>Description</th>
-                            <th className='w-3/12 py-2 border-2 border-white'>Action</th>
+                            <th className='w-1/12 py-2 border-2 border-white'>Status</th>
+                            <th className='w-2/12 py-2 border-2 border-white'>Title</th>
+                            <th className='w-3/12 py-2 border-2 border-white'>Description</th>
+                            <th className='w-2/12 py-2 border-2 border-white'>Date</th>
+                            <th className='w-2/12 py-2 border-2 border-white'>Time</th>
+                            <th className='w-2/12 py-2 border-2 border-white'>Action</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         {todos.map((todo, index) => (
                             <tr key={index}>
-                                <td className='w-3/12 px-1 py-2 text-center border-2 border-white'>{todo.title}</td>
-                                <td className='w-6/12 px-1 py-2 text-center border-2 border-white'>{todo.description}</td>
-                                <td className='w-3/12 px-1 py-2 border-2 border-white'>
+                                <td className='w-1/12 px-1 py-2 text-center border-2 border-white'>{todo.complete}</td>
+                                <td className='w-2/12 px-1 py-2 text-center border-2 border-white'>{todo.title}</td>
+                                <td className='w-3/12 px-1 py-2 text-center border-2 border-white'>{todo.description}</td>
+                                <td className='w-2/12 px-1 py-2 text-center border-2 border-white'>{todo.date}</td>
+                                <td className='w-2/12 px-1 py-2 text-center border-2 border-white'>{todo.time}</td>
+                                <td className='w-2/12 px-1 py-2 border-2 border-white'>
                                     <div className='flex items-center justify-center '>
                                         <Link to={`/update/${todo.id}`} className='px-4 py-1 mr-2 text-white bg-blue-500 rounded '>
                                             <EditIcon />
