@@ -6,13 +6,14 @@ import Checkbox from '@mui/material/Checkbox';
 
 function Add() {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const todos = useSelector((state) => state.todos)
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
+    const navigate = useNavigate() 
     const time = new Date().toLocaleTimeString()
     const date = new Date().toLocaleDateString()
     const complete = <Checkbox />
+
+    const todos = useSelector((state) => state.todos)
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault();

@@ -4,9 +4,9 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { updateTodo } from '../Redux/TodoReducer';
 
 function Update() {
-    const { id } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate()
+    const { id } = useParams();
     const todos = useSelector((state) => state.todos);
     const existingTodo = todos.filter(e => e.id == id);
     const { title, description } = existingTodo[0];
