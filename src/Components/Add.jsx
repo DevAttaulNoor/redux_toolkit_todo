@@ -6,7 +6,7 @@ import { addTodo } from '../Redux/TodoReducer'
 function Add() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const time = new Date().toLocaleString()
+    const time = Date()
     const todos = useSelector((state) => state.todos)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')

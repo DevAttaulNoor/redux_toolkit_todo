@@ -1,17 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = [
-    {
-        id: 1,
-        title: 'Learn Html',
-        description: 'I have started learning html from tommorow...',
-        time: `${new Date().toLocaleString()}`,
-    }
-]
-
 export const todoSlice = createSlice({
     name: 'todos',
-    initialState,
+    initialState : [],
     reducers: {
         addTodo: (state, action) => {
             state.push(action.payload)
