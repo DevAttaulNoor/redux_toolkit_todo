@@ -5,7 +5,7 @@ import { updateTodo } from '../Redux/TodoReducer';
 
 function Update() {
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const { id } = useParams();
     const todos = useSelector((state) => state.todos);
     const existingTodo = todos.filter(e => e.id == id);
@@ -24,25 +24,28 @@ function Update() {
     }
 
     return (
-        <div className='flex flex-col items-center justify-center h-screen update'>
-            <div className='w-1/2 p-5 mx-40 rounded-lg bg-neutral-700'>
-                <h3 className='mb-6 text-3xl font-semibold text-center'>Edit Todo</h3>
-                <form onSubmit={handleEdit}>
-                    <div className='flex flex-col'>
-                        <div className='mb-3'>
-                            <label className='text-xl' htmlFor="title">Title:</label>
-                            <input className='w-full p-2 text-neutral-700 outline-0' type="text" name="title" placeholder='Enter title..' value={editTitle} onChange={e => setEditTitle(e.target.value)} />
+        <div id='update' className='flex flex-col items-center justify-center w-full h-screen'>
+            <div className='bg-[#9417e2] w-1/2 h-fit p-5 rounded-[8px]'>
+                <div id='updateTop' className='mb-5 pb-[10px] text-center border-b-[2px] border-[#1f1e1e]'>
+                    <h1 className='text-3xl font-semibold'>Update To Do Task<span className='text-[#1f1e1e]'>.</span></h1>
+                </div>
+
+                <div id='updateContent'>
+                    <form onSubmit={handleEdit}>
+                        <div className='mb-4'>
+                            <label className='text-2xl font-semibold tracking-wide' htmlFor="title">Title:</label>
+                            <input className='w-full p-2 text-neutral-700 outline-0 rounded-[8px]' type="text" name="title" placeholder='Enter title..' value={editTitle} onChange={e => setEditTitle(e.target.value)} />
                         </div>
-                        <div className='mb-3'>
-                            <label className='text-xl' htmlFor="description">Description:</label>
-                            <input className='w-full p-2 text-neutral-700 outline-0' type="text" name="description" placeholder='Enter description..' value={editDescription} onChange={e => setEditDescription(e.target.value)} />
+                        <div className='mb-4'>
+                            <label className='text-2xl font-semibold tracking-wide' htmlFor="description">Description:</label>
+                            <input className='w-full p-2 text-neutral-700 outline-0 rounded-[8px]' type="text" name="description" placeholder='Enter description..' value={editDescription} onChange={e => setEditDescription(e.target.value)} />
                         </div>
-                    </div>
-                    <div className='flex items-center justify-between'>
-                        <Link to={'/'} className='px-4 py-2 text-white bg-gray-500 rounded'>Back</Link>
-                        <button className='px-4 py-2 text-white bg-blue-500 rounded'>Update</button>
-                    </div>
-                </form>
+                        <div className='flex items-center justify-between mt-5'>
+                            <Link to={'/'} className='px-5 py-2 bg-[#1f1e1e] border-[2px] border-[#1f1e1e] rounded-[8px] hover:bg-[#9417e2]'>Back</Link>
+                            <button className='px-5 py-2 bg-[#1f1e1e] border-[2px] border-[#1f1e1e] rounded-[8px] hover:bg-[#9417e2]'>Edit</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     )

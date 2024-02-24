@@ -1,7 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteTodo } from '../Redux/TodoReducer';
+import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -13,51 +14,81 @@ function Home() {
         dispatch(deleteTodo({ id: id }))
     }
 
+    const timeAgowithInitials = (timestamp) => {
+        if (!timestamp || !timestamp.toDate) {
+            return "0s"
+        }
+        const currentDate = new Date();
+        const postDate = timestamp.toDate();
+        const seconds = Math.floor((currentDate - postDate) / 1000);
+        const secondsDifference = Math.max(seconds, 1);
+        const periods = {
+            D: 315360000,
+            Y: 31536000,
+            M: 2628000,
+            w: 604800,
+            d: 86400,
+            h: 3600,
+            m: 60,
+            s: 1,
+        };
+
+        let elapsed = 0;
+        let granularity = 0;
+        let unit = '';
+
+        for (const period in periods) {
+            elapsed = Math.floor(secondsDifference / periods[period]);
+
+            if (elapsed >= 1) {
+                granularity = elapsed;
+                unit = period;
+                break;
+            }
+        }
+        return `${granularity}${unit}${granularity > 1 ? '' : ''}`;
+    };
+
     return (
-        <div className='flex flex-col items-center h-screen home'>
-            <div className='w-1/2 p-5 m-auto overflow-y-auto rounded bg-neutral-700'>
-                <h2 className='mb-6 text-4xl font-semibold text-center'>Todo List</h2>
-
-                <div className='flex items-center justify-between mb-6'>
-                    <Link to={'/add'} className='p-2 text-white bg-green-500 rounded'>Add a new todo</Link>
-                    <p>Total Todo Tasks: {todos.length}</p>
-                </div>
-
-                <table className='w-full'>
-                    <thead>
-                        <tr className='text-2xl text-white bg-black'>
-                            <th className='w-1/12 py-2 border-2 border-white'>Status</th>
-                            <th className='w-2/12 py-2 border-2 border-white'>Title</th>
-                            <th className='w-3/12 py-2 border-2 border-white'>Description</th>
-                            <th className='w-2/12 py-2 border-2 border-white'>Date</th>
-                            <th className='w-2/12 py-2 border-2 border-white'>Time</th>
-                            <th className='w-2/12 py-2 border-2 border-white'>Action</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {todos.map((todo, index) => (
-                            <tr key={index}>
-                                <td className='w-1/12 px-1 py-2 text-center border-2 border-white'>{todo.complete}</td>
-                                <td className='w-2/12 px-1 py-2 text-center border-2 border-white'>{todo.title}</td>
-                                <td className='w-3/12 px-1 py-2 text-center border-2 border-white'>{todo.description}</td>
-                                <td className='w-2/12 px-1 py-2 text-center border-2 border-white'>{todo.date}</td>
-                                <td className='w-2/12 px-1 py-2 text-center border-2 border-white'>{todo.time}</td>
-                                <td className='w-2/12 px-1 py-2 border-2 border-white'>
-                                    <div className='flex items-center justify-center '>
-                                        <Link to={`/update/${todo.id}`} className='px-4 py-1 mr-2 text-white bg-blue-500 rounded '>
-                                            <EditIcon />
-                                        </Link>
-                                        <button className='px-4 py-1 text-white bg-red-500 rounded ' onClick={() => handleDelete(todo.id)}>
-                                            <DeleteIcon />
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+        <div id='home' className='flex flex-col p-5 mb-[5px] relative'>
+            <div id='homeTop' className='mb-5 text-center'>
+                <h1 className='text-3xl font-semibold'>To Do List<span className='text-[#9417e2]'>.</span></h1>
             </div>
+
+            <div id='homeMiddle' className='flex items-end justify-between mb-5 px-[15px] border-y-[2px] border-[#9417e2] py-[10px]'>
+                {todos.length > 1 ? (
+                    <p>Remaining Tasks To do = {todos.length}</p>
+                ) : (
+                    <p>Remaining Task To do = {todos.length}</p>
+                )}
+                
+                <Link to={'/add'}>
+                    <AddIcon className='!w-[30px] !h-[30px] bg-[#9417e2] border-[2px] border-[#9417e2] rounded-[50%] p-[5px] hover:bg-[#1f1e1e] ' />
+                </Link>
+            </div>
+
+            {todos.map((todo, index) => (
+                <div id='homeContent' key={index} className='mb-[15px] flex items-center justify-between bg-[#9417e2] px-[15px] py-[10px] rounded-[8px]'>
+                    <div className='flex justify-start'>
+                        <input type="checkbox" className='mr-[15px]' />
+
+                        <div className='flex flex-col'>
+                            <p className='text-[20px] leading-none'>{todo.description}</p>
+                            <p className='text-[10px] mt-[5px]'><span>{todo.title}</span> <span className='mx-[2px]'>•</span> <span>{timeAgowithInitials(todo.time)}</span></p>
+                        </div>
+                    </div>
+
+                    <div className='flex items-center'>
+                        <Link to={`/update/${todo.id}`}>
+                            <EditIcon className='!w-[30px] !h-[30px] hover:bg-[#1f1e1e] rounded-[50%] p-[5px]' />
+                        </Link>
+
+                        <div onClick={() => handleDelete(todo.id)}>
+                            <DeleteIcon className='!w-[30px] !h-[30px] hover:bg-[#1f1e1e] rounded-[50%] p-[5px]' />
+                        </div>
+                    </div>
+                </div>
+            ))}
         </div>
     )
 }
