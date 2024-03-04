@@ -69,8 +69,8 @@ function Home() {
 
             {todos.map((todo, index) => (
                 <div id='homeContent' key={index} className='mb-[15px] flex items-center justify-between bg-[#9417e2] px-[15px] py-[10px] rounded-[8px]'>
-                    <div className='flex justify-start'>
-                        <input type="checkbox" className='mr-[15px]' />
+                    <div className='flex justify-start items-center'>
+                        <input type="checkbox" className='mr-[15px] w-[16px] h-[16px]' />
 
                         <div className='flex flex-col'>
                             <p className='text-[20px] leading-none'>{todo.description}</p>
