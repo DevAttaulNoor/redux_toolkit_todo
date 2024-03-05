@@ -38,7 +38,7 @@ function Update() {
                         </div>
                         <div className='mb-4'>
                             <label className='text-2xl font-semibold tracking-wide' htmlFor="description">Description:</label>
-                            <input className='w-full p-2 text-neutral-700 outline-0 rounded-[8px]' type="text" name="description" placeholder='Enter description..' value={editDescription} onChange={e => setEditDescription(e.target.value)} />
+                            <input className='w-full p-2 text-neutral-700 outline-0 rounded-[8px]' type="text" name="description" placeholder='Enter description..' value={editDescription} onChange={e => setEditDescription(e.target.value)} required/>
                         </div>
                         <div className='flex items-center justify-between mt-5'>
                             <Link to={'/'} className='px-5 py-2 bg-[#1f1e1e] border-[2px] border-[#1f1e1e] rounded-[8px] hover:bg-[#9417e2]'>Back</Link>

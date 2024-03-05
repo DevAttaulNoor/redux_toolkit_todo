@@ -1,19 +1,19 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteTodo, toggleTodo } from '../Redux/TodoReducer';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 function Home() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const todos = useSelector((state) => state.todos);
-    const remainingTodos = todos.filter(todo => !todo.isChecked).length
+    const remainingTodos = todos.filter(todo => !todo.isChecked).length;
 
     const handleDelete = (id) => {
-        dispatch(deleteTodo({ id: id }))
-    }
+        dispatch(deleteTodo({ id: id }));
+    };
 
     const handleCheckboxChange = (id) => {
         dispatch(toggleTodo({ id: id }));
@@ -59,10 +59,10 @@ function Home() {
 
             <div id='homeMiddle' className='flex items-center justify-between mb-5 px-[15px] border-y-[2px] border-[#9417e2] py-[10px]'>
                 <div>
-                    {todos.length > 1 ? (
-                        <p>Total Todos = {todos.length}</p>
+                    {todos?.length > 1 ? (
+                        <p>Total Todos = {todos?.length}</p>
                     ) : (
-                        <p>Total Todo = {todos.length}</p>
+                        <p>Total Todo = {todos?.length}</p>
                     )}
 
                     {remainingTodos > 1 ? (
@@ -73,20 +73,28 @@ function Home() {
                 </div>
 
                 <Link to={'/add'}>
-                    <AddIcon className='!w-[30px] !h-[30px] bg-[#9417e2] border-[2px] border-[#9417e2] rounded-[50%] p-[5px] hover:bg-[#1f1e1e] ' />
+                    <AddIcon className='!w-[42px] !h-[42px] bg-[#9417e2] border-[2px] border-[#9417e2] rounded-[50%] p-[5px] hover:bg-[#1f1e1e] ' />
                 </Link>
             </div>
 
-            {console.log(todos)}
-
-            {todos.map((todo, index) => (
-                <div id='homeContent' key={index} className={`mb-[15px] flex items-center justify-between bg-[#9417e2] px-[15px] py-[10px] rounded-[8px] ${todo.isChecked ? 'line-through ' : ''}`}>
+            {todos && todos.map((todo, index) => (
+                <div id='homeContent' key={index} className={`mb-[15px] flex items-center justify-between bg-[#9417e2] px-[15px] py-[10px] rounded-[8px]`}>
                     <div className='flex items-center justify-start'>
                         <input type="checkbox" className='mr-[15px] w-[16px] h-[16px]' onChange={() => handleCheckboxChange(todo.id)} checked={todo.isChecked} />
 
-                        <div className='flex flex-col'>
+                        <div className={`flex flex-col ${todo.isChecked ? 'line-through ' : ''}`}>
                             <p className='text-[20px] leading-none'>{todo.description}</p>
-                            <p className='text-[10px] mt-[5px]'><span>{todo.title}</span> <span className='mx-[2px]'>•</span> <span>{timeAgowithInitials(todo.time)}</span></p>
+                            <p className='text-[10px] mt-[5px]'>
+                                {todo.title ? (
+                                    <>
+                                        <span>{todo.title}</span>
+                                        <span className='mx-[4px]'>•</span>
+                                        <span>{timeAgowithInitials(todo.time)}</span>
+                                    </>
+                                ) : (
+                                    <span>{timeAgowithInitials(todo.time)}</span>
+                                )}
+                            </p>
                         </div>
                     </div>
 
@@ -103,8 +111,8 @@ function Home() {
                     )}
                 </div>
             ))}
-        </div >
-    )
+        </div>
+    );
 }
 
-export default Home
+export default Home;
