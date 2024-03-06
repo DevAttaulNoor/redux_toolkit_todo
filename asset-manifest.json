@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/redux_toolkit_todo/static/css/main.337602cd.css",
+    "main.js": "/redux_toolkit_todo/static/js/main.f2fadda7.js",
+    "index.html": "/redux_toolkit_todo/index.html",
+    "main.337602cd.css.map": "/redux_toolkit_todo/static/css/main.337602cd.css.map",
+    "main.f2fadda7.js.map": "/redux_toolkit_todo/static/js/main.f2fadda7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.337602cd.css",
+    "static/js/main.f2fadda7.js"
+  ]
+}
