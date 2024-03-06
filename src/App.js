@@ -5,7 +5,7 @@ import Update from './Components/Update';
 
 function App() {
     return (
-        <Router>
+        <Router basename="/redux_toolkit_todo">
             <div className="App">
                 <Routes>
                     <Route path="/" element={<Home />} />
