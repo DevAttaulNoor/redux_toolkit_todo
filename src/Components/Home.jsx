@@ -52,12 +52,12 @@ function Home() {
     };
 
     return (
-        <div id='home' className='flex flex-col p-5 mb-[5px] relative'>
-            <div id='homeTop' className='mb-5 text-center'>
+        <div className='flex flex-col p-3 sm:p-5'>
+            <div className='text-center'>
                 <h1 className='text-3xl font-semibold'>To Do List<span className='text-[#9417e2]'>.</span></h1>
             </div>
 
-            <div id='homeMiddle' className='flex items-center justify-between mb-5 px-[15px] border-y-[2px] border-[#9417e2] py-[10px]'>
+            <div className='flex items-center justify-between p-3.5 my-4 border-y-2 border-[#9417e2]'>
                 <div>
                     {todos?.length > 1 ? (
                         <p>Total Todos = {todos?.length}</p>
@@ -73,22 +73,22 @@ function Home() {
                 </div>
 
                 <Link to={'/add'}>
-                    <AddIcon className='!w-[42px] !h-[42px] bg-[#9417e2] border-[2px] border-[#9417e2] rounded-[50%] p-[5px] hover:bg-[#1f1e1e] ' />
+                    <AddIcon className='!w-10 !h-10 rounded-[50%] p-1.5 border-2 border-[#9417e2] bg-[#9417e2] hover:bg-[#1f1e1e]' />
                 </Link>
             </div>
 
             {todos && todos.map((todo, index) => (
-                <div id='homeContent' key={index} className={`mb-[15px] flex items-center justify-between bg-[#9417e2] px-[15px] py-[10px] rounded-[8px]`}>
+                <div key={index} className='flex items-center justify-between rounded-lg px-4 py-3 mb-3 bg-[#9417e2]'>
                     <div className='flex items-center justify-start'>
-                        <input type="checkbox" className='mr-[15px] w-[16px] h-[16px]' onChange={() => handleCheckboxChange(todo.id)} checked={todo.isChecked} />
+                        <input type="checkbox" className='w-4 h-4 mr-4 cursor-pointer' onChange={() => handleCheckboxChange(todo.id)} checked={todo.isChecked} />
 
                         <div className={`flex flex-col ${todo.isChecked ? 'line-through ' : ''}`}>
-                            <p className='text-[20px] leading-none'>{todo.description}</p>
-                            <p className='text-[10px] mt-[5px]'>
+                            <p className='text-xl leading-none'>{todo.description}</p>
+                            <p className='mt-1 text-xs'>
                                 {todo.title ? (
                                     <>
                                         <span>{todo.title}</span>
-                                        <span className='mx-[4px]'>•</span>
+                                        <span className='mx-1'>•</span>
                                         <span>{timeAgowithInitials(todo.time)}</span>
                                     </>
                                 ) : (
@@ -101,11 +101,11 @@ function Home() {
                     {!todo.isChecked && (
                         <div className='flex items-center'>
                             <Link to={`/update/${todo.id}`}>
-                                <EditIcon className='!w-[30px] !h-[30px] hover:bg-[#1f1e1e] rounded-[50%] p-[5px]' />
+                                <EditIcon className='!w-8 !h-8 rounded-[50%] p-1.5 hover:bg-[#1f1e1e]' />
                             </Link>
 
                             <div onClick={() => handleDelete(todo.id)}>
-                                <DeleteIcon className='!w-[30px] !h-[30px] hover:bg-[#1f1e1e] rounded-[50%] p-[5px]' />
+                                <DeleteIcon className='!w-8 !h-8 rounded-[50%] p-1.5 hover:bg-[#1f1e1e]' />
                             </div>
                         </div>
                     )}
