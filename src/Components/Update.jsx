@@ -8,7 +8,7 @@ function Update() {
     const navigate = useNavigate();
     const { id } = useParams();
     const todos = useSelector((state) => state.todos);
-    const existingTodo = todos.filter(e => e.id == id);
+    const existingTodo = todos.filter(e => e.id === id);
     const { title, description } = existingTodo[0];
     const [editTitle, setEditTitle] = useState(title);
     const [editDescription, setEditDescription] = useState(description);
