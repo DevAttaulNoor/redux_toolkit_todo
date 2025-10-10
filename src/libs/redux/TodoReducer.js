@@ -5,7 +5,7 @@ const loadState = () => {
     try {
         const serializedState = localStorage.getItem('todos');
         if (!serializedState) return [];
-        return JSON.parse(serializedState); // keep numeric timestamps
+        return JSON.parse(serializedState);
     } catch (error) {
         console.error(error);
         return [];

@@ -12,7 +12,7 @@ export const Layout = ({ children }) => {
     }, [location]);
 
     return (
-        <main className=" relative mx-auto flex h-full w-full max-w-[1200px] flex-col overflow-hidden shadow-xl">
+        <main className="relative max-w-[1200px] w-full h-screen flex flex-col mx-auto overflow-hidden">
             {children ? children : <Outlet />}
         </main>
     )
