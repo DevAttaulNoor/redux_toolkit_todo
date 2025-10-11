@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Form } from "../../components/Form";
 import { Routes } from "../../constants/Routes";
+import { usePageMeta } from "../../hooks/usePageMeta";
 import { addTodo } from "../../libs/redux/TodoReducer";
 
 const Add = () => {
+    usePageMeta(Routes.ADD.meta);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const todos = useSelector(state => state.todos);
@@ -74,10 +76,10 @@ const Add = () => {
                         buttons: [
                             {
                                 path: Routes.HOME.path,
-                                title: 'Back'
+                                title: Routes.HOME.title
                             },
                             {
-                                title: 'Add'
+                                title: Routes.ADD.title
                             },
                         ]
                     }}

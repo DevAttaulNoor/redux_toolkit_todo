@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Form } from "../../components/Form";
 import { Routes } from "../../constants/Routes";
+import { usePageMeta } from "../../hooks/usePageMeta";
 import { editTodo } from "../../libs/redux/TodoReducer";
 
 const Edit = () => {
+    usePageMeta(Routes.EDIT.meta);
     const { id } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -79,10 +81,10 @@ const Edit = () => {
                         buttons: [
                             {
                                 path: Routes.HOME.path,
-                                title: 'Back'
+                                title: Routes.HOME.title
                             },
                             {
-                                title: 'Edit'
+                                title: Routes.EDIT.title
                             },
                         ]
                     }}

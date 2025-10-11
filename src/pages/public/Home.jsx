@@ -2,9 +2,11 @@ import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { Routes } from "../../constants/Routes"
 import { TodoItem } from "../../components/todoItem"
+import { usePageMeta } from "../../hooks/usePageMeta"
 import { ReactIcons } from "../../constants/ReactIcons"
 
 const Home = () => {
+    usePageMeta(Routes.HOME.meta);
     const todos = useSelector(state => state.todos);
     const remainingTodos = todos?.filter(item => !item.isChecked);
 
